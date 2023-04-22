@@ -53,7 +53,7 @@
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 <div class="col">
                     <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                        <img src="{{asset('img/default.jpg')}}" class="card-img-top" alt="...">
                         <div class="card-body text-center">
                             <h5 class="card-title text-sm">Título 1</h5>
                             <p class="card-text text-xs">Descripción 1</p>
@@ -63,6 +63,67 @@
                         </div>
                     </div>
                 </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="{{asset('img/default.jpg')}}" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-sm">Título 1</h5>
+                            <p class="card-text text-xs">Descripción 1</p>
+                            <div class="overlay ">
+                                <a href="#" class="bg-yellow text-white px-4 py-2">Canjea ya!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="{{asset('img/default.jpg')}}" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-sm">Título 1</h5>
+                            <p class="card-text text-xs">Descripción 1</p>
+                            <div class="overlay ">
+                                <a href="#" class="bg-yellow text-white px-4 py-2">Canjea ya!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="{{asset('img/default.jpg')}}" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-sm">Título 1</h5>
+                            <p class="card-text text-xs">Descripción 1</p>
+                            <div class="overlay ">
+                                <a href="#" class="bg-yellow text-white px-4 py-2">Canjea ya!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="{{asset('img/default.jpg')}}" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-sm">Título 1</h5>
+                            <p class="card-text text-xs">Descripción 1</p>
+                            <div class="overlay ">
+                                <a href="#" class="bg-yellow text-white px-4 py-2">Canjea ya!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="{{asset('img/default.jpg')}}" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-sm">Título 1</h5>
+                            <p class="card-text text-xs">Descripción 1</p>
+                            <div class="overlay ">
+                                <a href="#" class="bg-yellow text-white px-4 py-2">Canjea ya!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
 
