@@ -1,6 +1,6 @@
 require('./bootstrap');
 
-
+/* Slider */
   $(function() {
     $("#slider").slider({
       range: true,
