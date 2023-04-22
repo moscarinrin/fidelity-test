@@ -1,19 +1,24 @@
 <div class="my-3 my-lg-4">
     <div id="controls" class="row my-4">
-        <div class="col col-lg-6">
+        <div class="col-12 col-lg-6">
             <div class="mb-3">
                 <div id="slider"></div>
-                <p class="text-sm mb-1 mt-3">Filtrar puntos</p>
-                <p>
-                    Desde: <span id="slider-value-min"></span> --
-                    Hasta: <span id="slider-value-max"></span>
-                </p>
-                <button class="btn btn-light border text-xs ms-5">VER TODOS</button>
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <p class="text-sm mb-1 mt-3">Filtrar puntos</p>
+                        <p class="mb-0">
+                            Desde: <span id="slider-value-min"></span> --
+                            Hasta: <span id="slider-value-max"></span>
+                        </p>
+                    </div>
+                    <button class="btn btn-light border text-xs">VER TODOS</button>
+                </div>
+
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-lg-6">
             <div class="row">
-                <div class="col ">
+                <div class="col-md-6 mb-2">
                     <div class="dropdown">
                         <button class="btn btn-light dropdown-toggle w-100 mb-2 border text-sm" type="button"
                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,7 +40,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-md-6 mb-2">
                     <button class="text-sm btn btn-light border ms-5">VER TODO</button>
                 </div>
 
