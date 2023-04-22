@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Fidelity Marketing</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-
-<body class="antialiased">
-    <div class="">Hola Mundo</div>
-</body>
-
-</html>
+@extends('layout.app')
+@section('content')
+<section>
+    <div class="container">
+        <img class="mx-auto w-100 my-5" src="{{asset('img/seccion-catalogo.png')}}" alt="acordion">
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                @include('components.grid')
+            </div>
+            <div class="col-12 col-lg-4">
+                @include('components.list')
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
