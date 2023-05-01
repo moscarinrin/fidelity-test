@@ -5,26 +5,30 @@
     border-radius: 10px;
     border: none;
     transition: all 0.2s ease-in-out;
-  }
-  
-  .card:hover {
+}
+
+.card:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .card .card-img-top {
+}
+
+
+.card .card-img-top {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-  }
-  
-  .card .card-body {
+    width: 10rem;
+    height: auto;
+    margin: 1rem auto;
+}
+
+.card .card-body {
     padding: 1rem;
-  }
-  
-  .card .card-title {
+}
+
+.card .card-title {
     font-weight: bold;
-  }
-  
-  .card .overlay {
+}
+
+.card .overlay {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -40,37 +44,51 @@
     justify-content: center;
     font-weight: bold;
     font-size: 1.2rem;
-  }
-  
-  .card:hover .overlay {
+}
+
+.card:hover .overlay {
     opacity: 1;
-  }
-  
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
     .card {
-      margin-bottom: 1.5rem;
+        margin-bottom: 1.5rem;
     }
-  }
+}
 
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active {
     border: 1px solid #c5c5c5;
-    background: #000000!important;
+    background: #000000 !important;
     font-weight: normal;
     color: #000000;
     border-radius: 2rem;
-    margin-top: -0.25rem!important;
+    margin-top: -0.25rem !important;
 }
+
 .ui-widget-content {
-  border: 1px solid #000000!important;
-  background: #000000!important;
-  color: #000000!important;
+    border: 1px solid #000000 !important;
+    background: #000000 !important;
+    color: #000000 !important;
 }
+
 .ui-widget-header {
-  background: #000000!important;
-  color: #000000!important;
- 
+    background: #000000 !important;
+    color: #000000 !important;
+
 }
+
 .ui-slider-horizontal {
-  height: 0.2rem!important;
+    height: 0.2rem !important;
+}
+
+@media (min-width: 992px) {
+    .card {
+        height: 18rem!important;
+    }
 }

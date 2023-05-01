@@ -2064,11 +2064,13 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 /* Slider */
 $(function () {
+  var min = $('#slider').data('min');
+  var max = $('#slider').data('max');
   $("#slider").slider({
     range: true,
-    min: 48,
-    max: 68521,
-    values: [48, 68521],
+    min: min,
+    max: max,
+    values: [min, max],
     slide: function slide(event, ui) {
       $("#slider-value-min").text(ui.values[0]);
       $("#slider-value-max").text(ui.values[1]);
@@ -2076,6 +2078,27 @@ $(function () {
   });
   $("#slider-value-min").text($("#slider").slider("values", 0));
   $("#slider-value-max").text($("#slider").slider("values", 1));
+});
+
+/* Funciones para botones */
+
+$(function () {
+  $(".verTodo").click(function () {
+    $.ajax({
+      url: 'mi_url.php',
+      type: 'POST',
+      data: {
+        parametro1: 'valor1',
+        parametro2: 'valor2'
+      },
+      success: function success(respuesta) {
+        console.log(respuesta);
+      },
+      error: function error(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      }
+    });
+  });
 });
 
 /***/ }),

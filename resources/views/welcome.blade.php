@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-lg-8">
-                @include('components.grid')
+                @include('components.grid', ["premios" => $premios , "catalogos" => $catalogos, "categorias" => $categorias, "puntos" => $puntos])
             </div>
             <div class="col-12 col-lg-4">
                 @include('components.list')
