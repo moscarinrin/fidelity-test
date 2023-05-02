@@ -37,7 +37,7 @@
                     </select>
                 </div>
                 <div class="col-md-5 mb-2">
-                    <button class="text-sm btn btn-light border ms-5 verTodo">Ver todo</button>
+                    <button id="verTodo" class="text-sm btn btn-light border ms-5 verTodo">Ver todo</button>
                 </div>
 
             </div>

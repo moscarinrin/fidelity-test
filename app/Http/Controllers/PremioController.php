@@ -109,23 +109,7 @@ class PremioController extends Controller{
         return $validatedCatalogs;
 
 
-        /* <fid:GetCatalogsRequest>
-         <fid:sessionID>ad7b84e5-ebef-40c5-80eb-9029205334c8</fid:sessionID>
-         <fid:dateFrom></fid:dateFrom>
-         <fid:dateTo></fid:dateTo>
-         <fid:pagination>
-            <fid1:initLimit>0</fid1:initLimit>
-            <fid1:rowCount>20</fid1:rowCount>
-            <!--Zero or more repetitions:-->
-            <fid1:orders>
-               <fid1:criteria></fid1:criteria>
-               <fid1:columnName></fid1:columnName>
-            </fid1:orders>
-            <fid1:recordsTotal></fid1:recordsTotal>
-            <fid1:actualPage></fid1:actualPage>
-            <fid1:totalPages></fid1:totalPages>
-         </fid:pagination>
-      </fid:GetCatalogsRequest>  */
+      
        
 
     }
@@ -182,14 +166,7 @@ class PremioController extends Controller{
         return $categoriesValidated;
        
 
-        /* <fid:GetPrizesCategoriesRequest>
-         <fid:sessionID>ad7b84e5-ebef-40c5-80eb-9029205334c8</fid:sessionID>
-         <fid:onlyOutstandingPrizeCategory></fid:onlyOutstandingPrizeCategory>
-         <fid:pagination>
-            <fid1:initLimit>0</fid1:initLimit>
-            <fid1:rowCount>20</fid1:rowCount>
-         </fid:pagination>
-      </fid:GetPrizesCategoriesRequest> */
+     
 
     }
 

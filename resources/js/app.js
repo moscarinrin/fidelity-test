@@ -60,6 +60,26 @@ $('#filtrarCategoria').change(function() {
     });
   });
 
+  $('#verTodo').change(function() {
+   
+    $(".premio").each(function() {
+        let categoriaId = $(this).attr("attr_cate_id");
+        if (categoriaId == categoriaSelected) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+  });
+
+  $("#verTodo").on("click", function() {
+    $(".premio").each(function() {
+       
+            $(this).show();
+    
+    });
+});
+
 
 
 

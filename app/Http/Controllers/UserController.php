@@ -23,7 +23,7 @@ class UserController extends Controller
            
         ];
 
-        // Llama al método SynchroAndLogin del servicio web y obtiene la respuesta
+        // Llama al método SynchroAndLogin del servicio web 
         $response = $client->SynchroAndLogin($params);
         if($response->sessionID){
             Session::put('sessionID', $response->sessionID);
