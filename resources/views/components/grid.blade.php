@@ -11,7 +11,7 @@
                             Hasta: <span id="slider-value-max"></span>
                         </p>
                     </div>
-                    <button class="btn btn-light border text-xs verTodo">Filtrar</button>
+                    <button class="btn btn-light border text-xs filtrarPuntos">Filtrar</button>
                 </div>
 
             </div>
@@ -19,17 +19,17 @@
         <div class="col-12 col-lg-6">
             <div class="row">
                 <div class="col-md-7 mb-2">
-                    <select class="form-select btn btn-light dropdown-toggle w-100 mb-2 border text-sm"
+                    <select id="filtrarCatalogo"  class="filtrarCatalogo form-select btn btn-light dropdown-toggle w-100 mb-2 border text-sm"
                         aria-label="Default select example">
-                        <option selected>Todos los catálogos</option>
+                        <option disabled selected value >Todos los catálogos</option>
                         @foreach ($catalogos as $catalogo)
                         <option value="{{$catalogo->id ?? 404}}">{{$catalogo->description ?? "No disponible"}}</option>
                         @endforeach
 
                     </select>
-                    <select class="form-select btn btn-light dropdown-toggle w-100 mb-2 border text-sm"
+                    <select id="filtrarCategoria" class="filtrarCategoria form-select btn btn-light dropdown-toggle w-100 mb-2 border text-sm"
                         aria-label="Default select example">
-                        <option selected>Categorias</option>
+                        <option disabled selected value>Categorias</option>
                         @foreach ($categorias as $categoria)
                         <option value="{{$categoria->id ?? 404}}">{{$categoria->description }}</option>
                         @endforeach
@@ -48,9 +48,9 @@
         <div class="container">
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 @foreach ($premios as $premio)
-                <div class="col">
-                    <div class="card" id="premio" attr_id="{{$premio->id}}" attr_cata_id="{{$premio->catalogId}}"
+                <div class="col premio" id="" attr_puntos="{{$premio->points}}"  attr_id="{{$premio->id}}" attr_cata_id="{{$premio->catalogId}}"
                         attr_cate_id="{{$premio->categoryId}}">
+                    <div class="card" >
                         <img src="{{$premio->pathImageAbsolute ?? asset('img/default.jpg')}}" class="card-img-top "
                             alt="...">
                         <div class="card-body text-center">

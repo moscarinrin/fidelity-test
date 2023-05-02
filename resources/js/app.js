@@ -20,25 +20,46 @@ $(function () {
     $("#slider-value-max").text($("#slider").slider("values", 1));
 });
 
+$(".filtrarPuntos").on("click", function() {
+    var minPuntos = $("#slider").slider("values", 0);
+    var maxPuntos = $("#slider").slider("values", 1);
 
-
-/* Funciones para botones */
-
-$(function () {
-    $(".verTodo").click(function () {
-        $.ajax({
-            url: 'mi_url.php',
-            type: 'POST',
-            data: {
-                parametro1: 'valor1',
-                parametro2: 'valor2'
-            },
-            success: function (respuesta) {
-                console.log(respuesta);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
-        });
+    
+    $(".premio").each(function() {
+        var puntos = $(this).attr("attr_puntos");
+        if (puntos >= minPuntos && puntos <= maxPuntos) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
     });
 });
+
+
+$('·#filtrarCatalogo').change(function() {
+    var catalogoSelected = $(this).val();
+    $(".premio").each(function() {
+        let catalogoId = $(this).attr("attr_cata_id");
+        if (catalogoId == catalogoSelected) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+  });
+
+$('#filtrarCategoria').change(function() {
+    var categoriaSelected = $(this).val();
+    $(".premio").each(function() {
+        let categoriaId = $(this).attr("attr_cate_id");
+        if (categoriaId == categoriaSelected) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+  });
+
+
+
+
