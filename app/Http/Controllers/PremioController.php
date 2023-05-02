@@ -4,12 +4,86 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Collection;
 use SoapClient;
 
 class PremioController extends Controller{
+
+
+    public function GetPrizesRequest(){
+        $sessionID = Session::get('sessionID');
+        $client = new SoapClient(env('SOAP_CLIENT_URL'));
+   
+        $params = [
+           "sessionID" => $sessionID,
+           "prize_ID" => "",
+           "catalog_ID" => "",
+           "code" => "",
+           "category_ID" => "",
+           "stock" => "",
+           "onlyOutstandingPrize" => "",
+           "onlySeasonal" => "",
+           "filterKindSeenAndRedeemed" => "",
+           "lastDays" => "",
+           "prizesCount" => "",
+           "pagination" => [
+               "InitLimit" => 0,
+               "rowCount" => 20,
+               "orders" => [
+                   "criteria" => "",
+                   "columnName" => ""
+               ],
+               "recordsTotal" => "",
+               "actualPage" => "",
+               "totalPages" => ""
+           ],
+       ];
+       $response = $client->GetPrizes($params);
+       if ($response){
+           /* Valida que los productos tienen stock y que este activo */
+           $validatedPrizes = $this->getvalidPrizes($response->PrizeList);
+          
+       }else{
+           $validatedPrizes = "No prizes";
+       }
+       
+       return $validatedPrizes;
+           
+       }
+   
+       public function getvalidPrizes($prizes){
+           $validatedPrizes = array();
+           foreach($prizes as $prize ){
+               if ($prize->stock > 0 && $prize->flags->enabled === true) {
+                   $validatedPrizes[] = $prize;
+               }else{
+                   $validatedPrizes = [
+                       "id" => 404,
+                       "name" => "No hay premos validos",
+                       
+                   ];
+               }
+           }
+           return $validatedPrizes;
+       }
+       public function getPointsRequest($premios){
+           $colecciónPremios = collect($premios);
+           $minPuntos = $colecciónPremios->min('points');
+           $maxPuntos = $colecciónPremios->max('points');
+   
+           $puntos = array(
+               "minPuntos" => $minPuntos,
+               "maxPuntos" => $maxPuntos
+           );
    
    
-    public function getCatalogsRequest(){
+           return $puntos;
+           
+       }
+
+   
+   
+    public function getCatalogsRequest($premios){
         $sessionID = Session::get('sessionID');
         $client = new SoapClient(env('SOAP_CLIENT_URL'));
         $params = [
@@ -29,10 +103,10 @@ class PremioController extends Controller{
             ]   
         ];
         $response = $client->GetCatalogs($params);
-        /* Saber como esyta relacionado los catalogos con las categorias (father_id) */
-        /* Saber como esta relacionado los catalogos con los premios y de acuerdo a eso filtrarlos */
-        /* $categoriasFiltradas = $this->filtrarCategorias(); */
-        return $response;
+        if($response){
+            $validatedCatalogs = $this->GetValidatedCatalogs($response->catalogList, $premios);
+        }
+        return $validatedCatalogs;
 
 
         /* <fid:GetCatalogsRequest>
@@ -55,7 +129,32 @@ class PremioController extends Controller{
        
 
     }
-    public function getPrizesCategoriesRequest(){
+
+    public function GetValidatedCatalogs($catalogs,$premios){
+
+
+        $validatedCatalogs = [];
+        foreach($catalogs as $catalog){
+            if($catalog->flags->enable === true ){
+                $validatedCatalogs[] = $catalog;
+            }
+        }
+        $catalogosValidos = collect($validatedCatalogs)->filter(function ($catalogo) use ($premios) {
+            foreach ($premios as $premio) {
+                if ($premio->catalogId == $catalogo->id) {
+                    return true;
+                }
+            }
+            return false;
+        });
+        
+
+        return $catalogosValidos;
+
+    }
+
+
+    public function getPrizesCategoriesRequest($premios){
         $sessionID = Session::get('sessionID');
         $client = new SoapClient(env('SOAP_CLIENT_URL'));
 
@@ -77,8 +176,11 @@ class PremioController extends Controller{
             "filterPrize" =>""   
         ];
         $response = $client->GetPrizesCategories($params);
-        /* 1 Entender como estan relacionados con los catalogos */
-        return $response;
+        if ($response){
+            $categoriesValidated = $this->GetRelationCategories($response->categoryList, $premios);
+        }
+        return $categoriesValidated;
+       
 
         /* <fid:GetPrizesCategoriesRequest>
          <fid:sessionID>ad7b84e5-ebef-40c5-80eb-9029205334c8</fid:sessionID>
@@ -90,48 +192,33 @@ class PremioController extends Controller{
       </fid:GetPrizesCategoriesRequest> */
 
     }
-    public function GetPrizesRequest(){
-     $sessionID = Session::get('sessionID');
-     $client = new SoapClient(env('SOAP_CLIENT_URL'));
 
-     $params = [
-        "sessionID" => $sessionID,
-        "prize_ID" => "",
-        "catalog_ID" => "",
-        "code" => "",
-        "category_ID" => "",
-        "stock" => "",
-        "onlyOutstandingPrize" => "",
-        "onlySeasonal" => "",
-        "filterKindSeenAndRedeemed" => "",
-        "lastDays" => "",
-        "prizesCount" => "",
-        "pagination" => [
-            "InitLimit" => 0,
-            "rowCount" => 20,
-            "orders" => [
-                "criteria" => "",
-                "columnName" => ""
-            ],
-            "recordsTotal" => "",
-            "actualPage" => "",
-            "totalPages" => ""
-        ],
-    ];
-    $response = $client->GetPrizes($params);
-    return $response;
+    public function GetRelationCategories($categorias,$premios){
+
+        $validatedCategories = [];
+        $validatedCategories = collect($categorias)->filter(function ($categoria) use ($premios) {
+            foreach ($premios as $premio) {
+                if ($premio->categoryId == $categoria->id) {
+                    return true;
+                }
+            }
+            return false;
+        });
         
-    }
 
+        return $validatedCategories;
+
+    }
 
     public function getInfo(){
 
         $sessionID = Session::get('sessionID');
         if(isset($sessionID) && $sessionID!= ''){
-            $catalogos = $this->getCatalogsRequest();
-            $categorias = $this->getPrizesCategoriesRequest();
             $premios = $this->GetPrizesRequest();
-           return view('welcome');
+            $catalogos = $this->getCatalogsRequest($premios);
+            $categorias = $this->getPrizesCategoriesRequest($premios);
+            $puntos = $this->getPointsRequest($premios);
+           return view('welcome')->with('premios', $premios)->with('categorias', $categorias)->with('catalogos', $catalogos)->with('puntos', $puntos);
         }else{
             return redirect("/login");
         }

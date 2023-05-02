@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', 'App\Http\Controllers\UserController@synchroAndLoginRequest');
 
 Route::get('/','App\Http\Controllers\PremioController@getInfo');
+Route::post('/todos', 'App\Http\Controllers\FiltrosController@getTodos');
 
 
 

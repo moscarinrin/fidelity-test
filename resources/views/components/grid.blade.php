@@ -2,7 +2,7 @@
     <div id="controls" class="row my-4">
         <div class="col-12 col-lg-6">
             <div class="mb-3">
-                <div id="slider"></div>
+                <div id="slider" data-min="{{ $puntos['minPuntos'] }}" data-max="{{ $puntos['maxPuntos'] }}"></div>
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-sm mb-1 mt-3">Filtrar puntos</p>
@@ -11,37 +11,33 @@
                             Hasta: <span id="slider-value-max"></span>
                         </p>
                     </div>
-                    <button class="btn btn-light border text-xs">VER TODOS</button>
+                    <button class="btn btn-light border text-xs filtrarPuntos">Filtrar</button>
                 </div>
 
             </div>
         </div>
         <div class="col-12 col-lg-6">
             <div class="row">
-                <div class="col-md-6 mb-2">
-                    <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle w-100 mb-2 border text-sm" type="button"
-                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Todos los catálogos
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
+                <div class="col-md-7 mb-2">
+                    <select id="filtrarCatalogo"  class="filtrarCatalogo form-select btn btn-light dropdown-toggle w-100 mb-2 border text-sm"
+                        aria-label="Default select example">
+                        <option disabled selected value >Todos los catálogos</option>
+                        @foreach ($catalogos as $catalogo)
+                        <option value="{{$catalogo->id ?? 404}}">{{$catalogo->description ?? "No disponible"}}</option>
+                        @endforeach
 
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle w-100 border text-start text-sm" type="button"
-                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categorias
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
+                    </select>
+                    <select id="filtrarCategoria" class="filtrarCategoria form-select btn btn-light dropdown-toggle w-100 mb-2 border text-sm"
+                        aria-label="Default select example">
+                        <option disabled selected value>Categorias</option>
+                        @foreach ($categorias as $categoria)
+                        <option value="{{$categoria->id ?? 404}}">{{$categoria->description }}</option>
+                        @endforeach
 
-                        </ul>
-                    </div>
+                    </select>
                 </div>
-                <div class="col-md-6 mb-2">
-                    <button class="text-sm btn btn-light border ms-5">VER TODO</button>
+                <div class="col-md-5 mb-2">
+                    <button class="text-sm btn btn-light border ms-5 verTodo">Ver todo</button>
                 </div>
 
             </div>
@@ -51,85 +47,29 @@
     <div id="grid">
         <div class="container">
             <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col">
-                    <div class="card">
-                        <img src="{{asset('img/default.jpg')}}" class="card-img-top" alt="...">
+                @foreach ($premios as $premio)
+                <div class="col premio" id="" attr_puntos="{{$premio->points}}"  attr_id="{{$premio->id}}" attr_cata_id="{{$premio->catalogId}}"
+                        attr_cate_id="{{$premio->categoryId}}">
+                    <div class="card" >
+                        <img src="{{$premio->pathImageAbsolute ?? asset('img/default.jpg')}}" class="card-img-top "
+                            alt="...">
                         <div class="card-body text-center">
-                            <h5 class="card-title text-sm">Título 1</h5>
-                            <p class="card-text text-xs">Descripción 1</p>
+                            <h5 class="card-title text-xs">{{$premio->name ?? "Sin informacion" }}</h5>
+                            <p class="card-text text-xs">{{$premio->points ?? "Sin informacion"}}</p>
                             <div class="overlay ">
                                 <a href="#" class="bg-yellow text-white px-4 py-2">Canjea ya!</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{asset('img/default.jpg')}}" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-sm">Título 1</h5>
-                            <p class="card-text text-xs">Descripción 1</p>
-                            <div class="overlay ">
-                                <a href="#" class="bg-yellow text-white px-4 py-2">Canjea ya!</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{asset('img/default.jpg')}}" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-sm">Título 1</h5>
-                            <p class="card-text text-xs">Descripción 1</p>
-                            <div class="overlay ">
-                                <a href="#" class="bg-yellow text-white px-4 py-2">Canjea ya!</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{asset('img/default.jpg')}}" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-sm">Título 1</h5>
-                            <p class="card-text text-xs">Descripción 1</p>
-                            <div class="overlay ">
-                                <a href="#" class="bg-yellow text-white px-4 py-2">Canjea ya!</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{asset('img/default.jpg')}}" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-sm">Título 1</h5>
-                            <p class="card-text text-xs">Descripción 1</p>
-                            <div class="overlay ">
-                                <a href="#" class="bg-yellow text-white px-4 py-2">Canjea ya!</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="{{asset('img/default.jpg')}}" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-sm">Título 1</h5>
-                            <p class="card-text text-xs">Descripción 1</p>
-                            <div class="overlay ">
-                                <a href="#" class="bg-yellow text-white px-4 py-2">Canjea ya!</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+                @endforeach
+
             </div>
         </div>
 
 
     </div>
-    <div id="pagination" class="m-2 m-lg-4">
+    <div id="pagination" class="m-2 m-lg-4  d-none">
         <nav aria-label="Page navigation rounded-0 ">
             <ul class="pagination  ">
                 <li class="page-item"><a class="page-link text-gray" href="">1</a></li>
