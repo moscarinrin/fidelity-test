@@ -2091,11 +2091,11 @@ $(".filtrarPuntos").on("click", function () {
     }
   });
 });
-$('·#filtrarCatalogo').change(function () {
+$('#filtrarCatalogo').change(function () {
   var catalogoSelected = $(this).val();
   $(".premio").each(function () {
     var catalogoId = $(this).attr("attr_cata_id");
-    if (catalogoId == catalogoSelected) {
+    if (catalogoId === catalogoSelected) {
       $(this).show();
     } else {
       $(this).hide();
@@ -2104,16 +2104,6 @@ $('·#filtrarCatalogo').change(function () {
 });
 $('#filtrarCategoria').change(function () {
   var categoriaSelected = $(this).val();
-  $(".premio").each(function () {
-    var categoriaId = $(this).attr("attr_cate_id");
-    if (categoriaId == categoriaSelected) {
-      $(this).show();
-    } else {
-      $(this).hide();
-    }
-  });
-});
-$('#verTodo').change(function () {
   $(".premio").each(function () {
     var categoriaId = $(this).attr("attr_cate_id");
     if (categoriaId == categoriaSelected) {

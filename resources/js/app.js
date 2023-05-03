@@ -36,11 +36,12 @@ $(".filtrarPuntos").on("click", function() {
 });
 
 
-$('·#filtrarCatalogo').change(function() {
+$('#filtrarCatalogo').change(function() {
     var catalogoSelected = $(this).val();
+   
     $(".premio").each(function() {
-        let catalogoId = $(this).attr("attr_cata_id");
-        if (catalogoId == catalogoSelected) {
+        var catalogoId = $(this).attr("attr_cata_id");
+        if (catalogoId === catalogoSelected) {
             $(this).show();
         } else {
             $(this).hide();
@@ -60,17 +61,6 @@ $('#filtrarCategoria').change(function() {
     });
   });
 
-  $('#verTodo').change(function() {
-   
-    $(".premio").each(function() {
-        let categoriaId = $(this).attr("attr_cate_id");
-        if (categoriaId == categoriaSelected) {
-            $(this).show();
-        } else {
-            $(this).hide();
-        }
-    });
-  });
 
   $("#verTodo").on("click", function() {
     $(".premio").each(function() {
